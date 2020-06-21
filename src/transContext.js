@@ -3,7 +3,7 @@ import TransactionReducer from './transReducer';
 
 //for dynamic 
  let intitalTransactions = [
-    { amount: 100, desc: "Cash" , id: 0},
+    { amount: 700, desc: "Cash" , id: 0},
     { amount: -40, desc: "Bank" , id: 1},
     { amount: -200, desc: "Camera" , id: 2}
 ]

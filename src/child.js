@@ -47,7 +47,7 @@ function Child() {
     const getExpense = () => {
         let expense = 0;
         for (var i = 0; i < transactions.length; i++) {
-            if (transactions[i].amount > 0)
+            if (transactions[i].amount < 0)
                 expense += transactions[i].amount
         }
         return expense;
@@ -58,7 +58,8 @@ function Child() {
             <div>
                 <h1 className="text-center">E-xpense Tracker</h1>
 
-                <h3>Your Balance <b>${getIncome() + getExpense()}</b></h3>
+                <h2>Your Balance <br/>
+                <b>${getIncome() + getExpense()}</b></h2>
 
                 <div className="expense-container">
                     <h3>INCOME <br /> ${getIncome()}</h3>
@@ -94,6 +95,8 @@ function Child() {
                 <form className="transaction-form" onSubmit={handleSubmit}>
                     <label>
                          Description <br />
+                        (Expense with '-' sign )
+                        <br />
                         <input type="text" value={newDesc} placeholder="Add description" onChange={(ev) => setDesc(ev.target.value)} required />
                     </label>
                     <br />
@@ -105,7 +108,7 @@ function Child() {
                     <input type="submit" value="Add Transaction" />
                 </form>
             </div>
-
+            <span className="Creator">This project is created by Govind Rai © </span>
         </div>
     );
 }
