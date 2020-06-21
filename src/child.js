@@ -75,7 +75,7 @@ function Child() {
                         return (
                             <li key={ind}>
                                 <span>{transOBj.desc} </span>
-                                <span>${transOBj.amount}<button className="crossSign" onClick={() => handleDelete(transOBj.id)}>&#9747;
+                                <span>${transOBj.amount}<button className="crossSign" onClick={() => {handleDelete(transOBj.id)}}>&#9747;
                                    
                                    </button></span>
                                
