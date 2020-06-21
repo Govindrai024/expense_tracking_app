@@ -1,11 +1,11 @@
-import React, {createContext, useReducer, children} from 'react';
+import React, {createContext, useReducer} from 'react';
 import TransactionReducer from './transReducer';
 
 //for dynamic 
  let intitalTransactions = [
-    { amount: 100, desc: "Cash" },
-    { amount: -40, desc: "Bank" },
-    { amount: -200, desc: "Camera" }
+    { amount: 100, desc: "Cash" , id: 0},
+    { amount: -40, desc: "Bank" , id: 1},
+    { amount: -200, desc: "Camera" , id: 2}
 ]
 
 // we are creating Context , which createContext HOOK
@@ -22,7 +22,7 @@ export const TransactionContext = createContext(intitalTransactions);
 
 //so here we are creating proveder which will render children
 
-export const TransactionProvider = ({children}) =>{
+export const TransactionProvider = ({children}) => {
 
     let [state, dispatch] = useReducer(TransactionReducer, intitalTransactions);
     
@@ -31,15 +31,27 @@ export const TransactionProvider = ({children}) =>{
             type: "ADD_TRANSACTION",
             payload: {
                 amount: transObj.amount,
-                disc: transObj.desc
+                disc: transObj.desc,
+                id: transObj.id
             },
         })
     }
+
+    function deleteTransaction(transObj) {
+        dispatch({
+            type: "DELETE TRANSACTION",
+            payload: {
+                id: transObj.index
+            }
+        })
+    }
+
     return(
 
         <TransactionContext.Provider value={{
             transactions: state,
-            addTransaction
+            addTransaction,
+            deleteTransaction
         }}>
             {children}
         </TransactionContext.Provider>

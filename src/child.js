@@ -4,14 +4,14 @@ import { TransactionContext } from './transContext';
 
 function Child() {
 
-    let { transactions, addTransaction } = useContext(TransactionContext);
+    let { transactions, addTransaction , deleteTransaction } = useContext(TransactionContext);
 
     //working on input
-    let { newDesc, setDesc } = useState("");
-    let { newAmount, setAmount } = useState(0);
+    let [newDesc, setDesc] = useState("");
+    let [newAmount, setAmount] = useState(0);
 
     //creating function which calls by default event
-    const handleAddittion = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault(); //this prevent to reload browser
         if( Number(newAmount) === 0){
             alert("Please enter valid amount.");
@@ -19,12 +19,20 @@ function Child() {
         }
         addTransaction({
             amount: Number(newAmount),
-            desc: newDesc
+            desc: String(newDesc),
+            id: transactions.length
         });
 
-        // setDesc("");
-        // setAmount(0);
+       
     }
+
+    function handleDelete(ind) {
+        console.log(ind)
+        deleteTransaction({
+            index: ind
+        })
+    }
+
 
     const getIncome = () => {
         let income = 0;
@@ -65,8 +73,13 @@ function Child() {
                     {transactions.map((transOBj, ind) => {
                         return (
                             <li key={ind}>
-                                <span>{transOBj.desc}</span>
-                                <span>${transOBj.amount}</span>
+                                <span>{transOBj.desc} </span>
+                                <span>${transOBj.amount}<button className="crossSign" onClick={() => handleDelete(transOBj.id)}>&#9747;
+                                   
+                                   </button></span>
+                               
+                                
+
                             </li>
                         )
                     })
@@ -78,7 +91,7 @@ function Child() {
                 <h3>Add new transaction</h3>
                 <hr />
 
-                <form className="transaction-form" onSubmit={handleAddittion}>
+                <form className="transaction-form" onSubmit={handleSubmit}>
                     <label>
                          Description <br />
                         <input type="text" value={newDesc} placeholder="Add description" onChange={(ev) => setDesc(ev.target.value)} required />

@@ -79,9 +79,21 @@ body{
 
 
 
+.crossSign{
+  color: #fff;
+  background-color: rgb(219, 10, 202);
+  margin: 0  0 0 15px ;
+  padding: 0;
+  border-radius: 10px;
+  cursor: pointer;
 
 
+}
+.crossSign:hover{
+  cursor: pointer;
+  background-color: rgb(235, 49, 25);
 
+}
 
 
 
